@@ -1,0 +1,59 @@
+WEBVTT
+
+00:00:45.000--> 00:00:46.000
+{
+  "question": "¿Quién es el que va montado en el caballo?",
+  "options": [
+    "Clancy",
+    "Josh Dun",
+    "Nico",
+    "Un personaje desconocido"
+  ],
+  "correct": 2
+}
+
+00:01:14.100 --> 00:01:15.100
+{
+  "question": "¿Por qué repite 'Jumpsuit, jumpsuit, cover me'?",
+  "options": [
+    "Porque tiene frío y quiere que el chándal le caliente",
+    "Porque el chándal que lleva le puede proteger de DEMA y los obispos"
+  ],
+  "correct": 1
+}
+
+00:01:57.000 --> 00:01:58.000
+{
+  "question": "¿Dónde se ha rodado este vídeo?",
+  "options": [
+    "Yakutsk, Rusia",
+    "Asturias, España",
+    "Tromsø, Noruega",
+    "Thórsmörk, Islandia"
+  ],
+  "correct": 3
+}
+
+00:03:05.000 --> 00:03:06.000
+{
+  "question": "¿A qué categoría fue nominada Jumpsuit en los GRAMMYs de 2019?",
+  "options": [
+    "Mejor canción de rock",
+    "Mejor vídeo musical",
+    "Mejor Actuación de Dúo/Grupo de Rock",
+    "Mejor interpretación solista de rock"
+  ],
+  "correct": 0
+}
+
+00:04:31.000 --> 00:04:32.000
+{
+  "question": "¿Por qué motivo los obispos no pueden ver el color amarillo?",
+  "options": [
+    "Porque es el color de la felicidad, amistad y optimismo",
+    "Porque los obispos son deuteranómalos",
+    "Porque el amarillo es el color de la traición según las leyes de DEMA",
+    "Porque el amarillo interfiere con su visión espectral"
+  ],
+  "correct": 0
+}

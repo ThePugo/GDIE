@@ -1,0 +1,61 @@
+WEBVTT
+
+00:00:31.500--> 00:00:32.500
+{
+  "question": "¿A quién pertenece la voz atenuada?",
+  "options": [
+    "Josh Dun",
+    "Tyler Joseph",
+    "Eminem",
+    "Está generada con IA"
+  ],
+  "correct": 0
+}
+
+00:01:16.100 --> 00:01:17.100
+{
+  "question": "¿A qué se refiere con 'East is up'?",
+  "options": [
+    "Tiene mala orientación y confunde el norte con el este",
+    "Se trata de un error en el mapa que Clancy encontró durante su escape",
+    "El amanecer (que se pone al este) está arriba (adelante), que representa la única forma de escapar de DEMA",
+    "Se refiere a una antigua creencia de que las verdades más importantes se encuentran al este"
+  ],
+  "correct": 2
+}
+
+00:02:03.400 --> 00:02:04.400
+{
+  "question": "Nico and the Niners y otra canción de Trench son las únicas que mencionan directamente a 'Nico'. ¿Cuál es la otra?",
+  "options": [
+    "Bandito",
+    "Jumpsuit",
+    "Morph",
+    "Levitate"
+  ],
+  "correct": 2
+}
+
+00:02:22.000 --> 00:02:23.000
+{
+  "question": "¿Quién es el líder de los Banditos?",
+  "options": [
+    "La mujer de Tyler",
+    "Josh Dun",
+    "Nico",
+    "Tyler Joseph"
+  ],
+  "correct": 1
+}
+
+00:03:06.900 --> 00:03:07.900
+{
+  "question": "¿A qué se refiere con 'We'll win but not everyone will get out'?",
+  "options": [
+    "Alude a la idea de que, aunque algunos problemas se resuelven, otros permanecen sin solución",
+    "Se refiere a la competencia en la industria musical, donde solo algunos logran destacarse",
+    "Implica que solo aquellos que realmente entiendan su música podrán superar sus miedos",
+    "Indica que la victoria sobre las inseguridades es posible, pero asume que no todos pueden conseguirlo"
+  ],
+  "correct": 3
+}

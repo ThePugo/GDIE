@@ -1,0 +1,61 @@
+WEBVTT
+
+00:00:46.500--> 00:00:47.500
+{
+  "question": "¿Dónde se encuentra ahora mismo Clancy tras los eventos en el submarino?",
+  "options": [
+    "En su propia cabeza",
+    "En la isla Voldsoy",
+    "En DEMA",
+    "Lejos de Trench"
+  ],
+  "correct": 1
+}
+
+00:01:30.000 --> 00:01:31.000
+{
+  "question": "La banda hizo una actuación en directo de The Outside que publicaron de forma oficial en YouTube. ¿En qué festival fue la actuación?",
+  "options": [
+    "Bonnaroo",
+    "Coachella",
+    "Lollapalooza",
+    "Corona Capital"
+  ],
+  "correct": 3
+}
+
+00:02:11.000 --> 00:02:12.000
+{
+  "question": "El vídeo se ha rodado en 3 sitios distintos de un estado de Estados Unidos. ¿Cuál?",
+  "options": [
+    "Kansas",
+    "Nevada",
+    "Ohio",
+    "California"
+  ],
+  "correct": 3
+}
+
+00:03:20.800 --> 00:03:21.800
+{
+  "question": "¿Por qué motivo se compara Tyler con un megalodón y con Megatron?",
+  "options": [
+    "Porque la banda antes era mucho más reconocida y respetada que ahora, similar a como el megalodón ahora está extinto y Megatron ya no es el más poderoso",
+    "Porque Tyler tiene miedo del mar y de los Transformer",
+    "Por su capacidad de adaptarse a diferentes entornos musicales, similar a como el megalodón dominaba los mares y Megatron se transforma para conquistar",
+    "Debido a su poderosa presencia escénica, que evoca la fuerza de un megalodón y la imponente figura de Megatron en el escenario"
+  ],
+  "correct": 0
+}
+
+00:05:07.800 --> 00:05:08.800
+{
+  "question": "¿Dónde se han visto antes los pasos para realizar el ritual de apoderamiento? (excluyendo los planos de la página de DEMA)",
+  "options": [
+    "En una filtración de la banda",
+    "En el vídeo de Jumpsuit",
+    "En el vídeo de Nico and the Niners",
+    "En un vídeo en directo de la banda"
+  ],
+  "correct": 2
+}

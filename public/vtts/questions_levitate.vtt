@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:28.000--> 00:00:29.000
+{
+  "question": "Tyler y Josh estrenaron esta canción antes de lo previsto. ¿Por qué?",
+  "options": [
+    "Porque se lo pidió Leo Messi a Tyler",
+    "Porque la discográfica rompió el contrato con la banda",
+    "Porque querían dar una sorpresa a los fans",
+    "Porque se filtró la canción en TIDAL"
+  ],
+  "correct": 3
+}
+
+00:00:50.500 --> 00:00:51.500
+{
+  "question": "¿Qué significado tiene 'I know I shouldn't say this but a curse from you is all that I would need right now, man'?",
+  "options": [
+    "Refleja la necesidad de aprobación, incluso si es negativa, de aquellos a quienes respeta",
+    "Es una alusión al catolicismo de Tyler Joseph y su constante cuestionamiento de sus creencias religiosas",
+    "Expresa su deseo de confrontación directa con sus críticos para encontrar motivación",
+    "Demuestra su conflicto interno y el valor que le da a la opinión de los demás, incluso en forma de crítica"
+  ],
+  "correct": 1
+}
+
+00:01:21.100 --> 00:01:22.100
+{
+  "question": "¿Qué significa que aparezca la imagen del buitre repetidamente?",
+  "options": [
+    "Simboliza el interés de Tyler por la ornitología y su impacto en la música",
+    "Que se siente con fuerzas ahora que está en Trench",
+    "Que Clancy aún está pensando en DEMA y en los obispos y esto le debilita",
+    "Sugiere que Tyler y Josh consideran al buitre como su animal espiritual"
+  ],
+  "correct": 2
+}
+
+00:01:54.300 --> 00:01:55.300
+{
+  "question": "Durante varios fragmentos del vídeo se puede ver a alguien infiltrado entre los Banditos. ¿Quién es?",
+  "options": [
+    "La mujer de Tyler",
+    "Josh Dun",
+    "Nico",
+    "Ned"
+  ],
+  "correct": 2
+}

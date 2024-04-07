@@ -1,0 +1,73 @@
+WEBVTT
+
+00:00:26.700--> 00:00:27.700
+{
+  "question": "¿Qué significado tiene 'This is not rap, this is not hip-hop. Just another attempt to make the voices stop'?",
+  "options": [
+    "Que el artista está explorando nuevos estilos musicales",
+    "Que la canción tiene una clasificación musical distinta al rap o al hip-hop",
+    "Que el género de la canción es reggae",
+    "Que el objetivo de la canción es expresar la lucha contra sus inseguridades"
+  ],
+  "correct": 3
+}
+
+00:00:45.000 --> 00:00:46.000
+{
+  "question": "Completa la letra: 'Can you save my ...?'",
+  "options": [
+    "Bloody Dirty Heart",
+    "Heavy Dirty Soul",
+    "Broken Spirit",
+    "Lazy Tired Mind"
+  ],
+  "correct": 1
+}
+
+00:01:00.000 --> 00:01:01.000
+{
+  "question": "¿A qué se refiere Tyler con 'Can you save my heavydirtysoul'?",
+  "options": [
+    "Busca redención por los errores del pasado",
+    "Es un grito de ayuda para combatir sus inseguridades",
+    "Es una metáfora de la purificación espiritual",
+    "Quiere inspiración para su próximo álbum"
+  ],
+  "correct": 1
+}
+
+00:02:00.000 --> 00:02:01.000
+{
+  "question": "¿Dónde se ha rodado el vídeo?",
+  "options": [
+    "Texas, Estados Unidos",
+    "Fjaðrárgljúfur, Islandia",
+    "Ohio, Estados Unidos",
+    "Madrid, España"
+  ],
+  "correct": 2
+}
+
+00:02:41.700 --> 00:02:42.700
+{
+  "question": "¿Cuántas reproducciones tiene en Spotify Heavydirtysoul?",
+  "options": [
+    "Más de 300 millones",
+    "Menos de 100 millones",
+    "Más de 800 millones",
+    "Entre 600 y 700 millones"
+  ],
+  "correct": 0
+}
+
+00:03:41.000 --> 00:03:42.000
+{
+  "question": "¿Qué certificación RIAA recibió la canción en 2018?",
+  "options": [
+    "Oro",
+    "Platino",
+    "Diamante",
+    "Multi-Platino"
+  ],
+  "correct": 1
+}

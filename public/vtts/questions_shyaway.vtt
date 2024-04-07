@@ -1,0 +1,61 @@
+WEBVTT
+
+00:00:06.000--> 00:00:07.000
+{
+  "question": "¿A qué pertenece el sonido que se escucha de fondo durante un segundo?",
+  "options": [
+    "Son sonidos de animales de la sabana",
+    "Son sonidos realizados por la hija de Tyler",
+    "Es el sonido producido por la batería",
+    "Es el sonido de un sintetizador de fondo"
+  ],
+  "correct": 1
+}
+
+00:00:29.000 --> 00:00:30.000
+{
+  "question": "¿Cuál es el nombre del dragón que aparece en la portada del álbum Scaled and Icy (y en la batería del vídeo)?",
+  "options": [
+    "Nico",
+    "Clifford",
+    "Ned",
+    "Trash"
+  ],
+  "correct": 3
+}
+
+00:01:10.700 --> 00:01:11.700
+{
+  "question": "¿Qué colores predominan en este álbum?",
+  "options": [
+    "Rosa y Azul",
+    "Rojo y Negro",
+    "Amarillo y Verde",
+    "Azul y Rojo"
+  ],
+  "correct": 0
+}
+
+00:01:49.700 --> 00:01:50.700
+{
+  "question": "Dentro de la historia, ¿dónde está ocurriendo el vídeo?",
+  "options": [
+    "Trench",
+    "DEMA",
+    "En un puerto",
+    "Isla Voldsoy"
+  ],
+  "correct": 1
+}
+
+00:02:31.300 --> 00:02:32.300
+{
+  "question": "¿Cuál es la canción de Scaled and Icy con más reproducciones en Spotify, por debajo de Shy Away?",
+  "options": [
+    "No Chances",
+    "Choker",
+    "The Outside",
+    "Saturday"
+  ],
+  "correct": 3
+}

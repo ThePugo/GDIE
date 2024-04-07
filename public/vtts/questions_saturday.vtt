@@ -1,0 +1,61 @@
+WEBVTT
+
+00:00:32.100--> 00:00:33.100
+{
+  "question": "¿Qué anunció Tyler mientras cantaba Saturday para los MTV Video Music Awards?",
+  "options": [
+    "El segundo embarazo de su mujer, Jenna",
+    "La ruptura con su sello discográfico, Fueled by Ramen",
+    "Una futura colaboración con otro artista",
+    "El cumpleaños del perro de Josh, Jim"
+  ],
+  "correct": 0
+}
+
+00:01:14.500 --> 00:01:15.500
+{
+  "question": "¿Con qué famoso productor trabajó Tyler para dar forma a Saturday?",
+  "options": [
+    "Dr Dre",
+    "Greg Kurstin",
+    "Rick Rubin",
+    "Kanye West"
+  ],
+  "correct": 1
+}
+
+00:02:27.000 --> 00:02:28.000
+{
+  "question": "¿Cómo se sabe que el nombre del dragón es 'Trash'?",
+  "options": [
+    "Se menciona directamente en el vídeo de la canción 'Choker'",
+    "Por un tweet publicado por la banda",
+    "Por una de las cartas de Clancy publicada en la página de DEMA",
+    "Por una historia de Instagram publicada por Tyler"
+  ],
+  "correct": 3
+}
+
+00:02:45.800 --> 00:02:46.800
+{
+  "question": "¿Por qué la nota alta la canta aquí Josh y no Tyler?",
+  "options": [
+    "Por normas dictadas por DEMA",
+    "Porque Josh puede llegar a esa nota mejor que Tyler",
+    "Porque el cantante de la banda en Scaled and Icy es Josh",
+    "Por una apuesta realizada entre ellos"
+  ],
+  "correct": 3
+}
+
+00:03:10.000 --> 00:03:11.000
+{
+  "question": "Tyler y Josh bromearon diciendo que el submarino en el que rodaron el vídeo pertenece a una celebridad muy conocida. ¿Quién?",
+  "options": [
+    "Elon Musk",
+    "Will Smith",
+    "Dwayne Johnson",
+    "Cristiano Ronaldo"
+  ],
+  "correct": 1
+}
