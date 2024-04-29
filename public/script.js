@@ -188,21 +188,86 @@ document.addEventListener('DOMContentLoaded', function () {
     let newSrc;
     switch (currentQuality) {
       case '720':
-        newSrc = `videos/${baseName}720.mp4`;
+        if (window.dashPlayer) {
+          window.dashPlayer.reset();
+        }
+        if (window.hlsPlayer) {
+          window.hlsPlayer.destroy();
+        }
+        newSrc = `videos/${baseName}/${baseName}720.mp4`;
+        video.src = newSrc;
+        video.load();
+        video.currentTime = currentTime;
+        video.playbackRate = currentRate;
+        video.play();
+        if (!video.paused) {
+          playPauseBtn.firstChild.src='images/pause.png';
+        }
         break;
       case '1080':
-        newSrc = `videos/${baseName}.mp4`;
+        if (window.dashPlayer) {
+          window.dashPlayer.reset();
+        }
+        if (window.hlsPlayer) {
+          window.hlsPlayer.destroy();
+        }
+        newSrc = `videos/${baseName}/${baseName}1080.mp4`;
+        video.src = newSrc;
+        video.load();
+        video.currentTime = currentTime;
+        video.playbackRate = currentRate;
+        video.play();
+        if (!video.paused) {
+          playPauseBtn.firstChild.src = 'images/pause.png';
+        }
         break;
       case '480':
-        newSrc = `videos/${baseName}480.mp4`;
+        if (window.dashPlayer) {
+          window.dashPlayer.reset();
+        }
+        if (window.hlsPlayer) {
+          window.hlsPlayer.destroy();
+        }
+        newSrc = `videos/${baseName}/${baseName}480.mp4`;
+        video.src = newSrc;
+        video.load();
+        video.currentTime = currentTime;
+        video.playbackRate = currentRate;
+        video.play();
+        if (!video.paused) {
+          playPauseBtn.firstChild.src = 'images/pause.png';
+        }
+        break;
+      case '360':
+        if (window.dashPlayer) {
+          window.dashPlayer.reset();
+        }
+        if (window.hlsPlayer) {
+          window.hlsPlayer.destroy();
+        }
+        newSrc = `videos/${baseName}/${baseName}360.mp4`;
+        video.src = newSrc;
+        video.load();
+        video.currentTime = currentTime;
+        video.playbackRate = currentRate;
+        video.play();
+        if (!video.paused) {
+          playPauseBtn.firstChild.src = 'images/pause.png';
+        }
+        break;
+      case 'dash':
+        if (window.hlsPlayer) {
+          window.hlsPlayer.destroy();
+        }
+        initDash(video, video.currentTime, video.id);
+        break;
+      case 'hls':
+        if (window.dashPlayer) {
+          window.dashPlayer.reset();
+        }
+        initHls(video, currentTime, video.id);
         break;
     }
-
-    video.src = newSrc;
-    video.load();
-    video.currentTime = currentTime;
-    video.playbackRate = currentRate;
-    video.play();
   });
 
   // Asignación del evento de clic al botón de config
@@ -322,6 +387,12 @@ function resetVideoSettings(video) {
   const timeDisplay = document.getElementById('timeDisplay');
   const settingsMenu = document.getElementById('settingsMenu');
   const qualitySelect = document.getElementById('qualitySelect');
+  if (window.dashPlayer) {
+    window.dashPlayer.reset();
+  }
+  if (window.hlsPlayer) {
+    window.hlsPlayer.destroy();
+  }
   //caso de que se pulse otro vídeo mientras se muestra una pregunta
   if (document.getElementById('questionContainer').style.display === 'inline-block') {
     // Oculta el contenedor de la pregunta
@@ -336,7 +407,7 @@ function resetVideoSettings(video) {
   qualitySelect.value = 1080;
   const videoId = video.id;
 
-  const newSrc = `videos/${videoId}.mp4`;
+  const newSrc = `videos/${videoId}/${videoId}1080.mp4`;
 
   video.src = newSrc;
 
@@ -443,7 +514,7 @@ function updateMetadata(videoId) {
     vidtitle.textContent = "Jumpsuit (2018)";
     vidalbum.textContent = "Album: Trench (Track 1)";
   }
-  else if (videoId === "natn") {
+  else if (videoId === "onatn") {
     vidtitle.textContent = "Nico and the Niners (2018)";
     vidalbum.textContent = "Album: Trench (Track 9)";
   }
@@ -459,7 +530,7 @@ function updateMetadata(videoId) {
     vidtitle.textContent = "Saturday (2021)";
     vidalbum.textContent = "Album: Scaled and Icy (Track 5)";
   }
-  else if (videoId === "theoutside") {
+  else if (videoId === "outside") {
     vidtitle.textContent = "The Outside (2021)";
     vidalbum.textContent = "Album: Scaled and Icy (Track 4)";
   }
@@ -610,4 +681,36 @@ function countQuestionsInVTT(vttPath) {
 function countAllQuestions(vttPaths) {
   const countsPromises = vttPaths.map(path => countQuestionsInVTT(path));
   return Promise.all(countsPromises).then(counts => counts.reduce((acc, count) => acc + count, 0));
+}
+
+function initDash(video, time, basename) {
+  video.src = '';
+  var player = dashjs.MediaPlayer().create();
+  player.initialize(video, `https://gdie2407.ltim.uib.es/videos/${basename}/${basename}_dash.mpd`, true);
+  let change = false;
+  player.on(dashjs.MediaPlayer.events.CAN_PLAY, function () {
+    if (!change) {
+      change = true;
+      video.currentTime = time;
+    }
+  })
+  window.dashPlayer = player;
+}
+
+function initHls(video, time, basename) {
+  video.src = '';
+  if (Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource(`https://gdie2407.ltim.uib.es/videos/${basename}/master.m3u8`);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+      video.load();
+      video.play();
+      video.currentTime=time;
+      if (!video.paused) {
+        playPauseBtn.firstChild.src = 'images/pause.png';
+      }
+    })
+    window.hlsPlayer = hls;
+  }
 }

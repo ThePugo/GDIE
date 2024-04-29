@@ -53,4 +53,4 @@ Si observamos ahora al número de personas presentes en el agua, veremos que hay
 
 00:03:39.000 --> 00:03:40.000
 ¡CONTINÚA LA HISTORIA EN EL SIGUIENTE VÍDEO!<br><br>
-<button onClick="playVideo('theoutside')" class="red-button">THE OUTSIDE</button>
+<button onClick="playVideo('outside')" class="red-button">THE OUTSIDE</button>
