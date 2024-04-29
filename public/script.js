@@ -692,6 +692,9 @@ function initDash(video, time, basename) {
     if (!change) {
       change = true;
       video.currentTime = time;
+      if (!video.paused) {
+        playPauseBtn.firstChild.src = 'images/pause.png';
+      }
     }
   })
   window.dashPlayer = player;
@@ -705,7 +708,6 @@ function initHls(video, time, basename) {
     hls.attachMedia(video);
     hls.on(Hls.Events.MANIFEST_PARSED, function () {
       video.load();
-      video.play();
       video.currentTime=time;
       if (!video.paused) {
         playPauseBtn.firstChild.src = 'images/pause.png';
