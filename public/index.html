@@ -86,7 +86,7 @@
       <a href="#usernameForm" style="text-decoration: none;">Inicia Sesión Para Ver Las Preguntas</a>
     </div>
   </section>
-  <button id="chatToggle" class="chat-toggle">Chat</button>
+  <button id="chatToggle" class="chat-toggle">ChatBot</button>
 
   <!-- Chat Container -->
   <section id="chatContainer" class="chat-container">
@@ -275,6 +275,13 @@
   <section id="userScores" class="user-scores" style="display: none;">
     <h3>Puntuación de los Usuarios Conectados</h3>
     <div id="scoresContainer"></div>
+    
+    <!-- Chat de usuarios -->
+    <div class="user-chat-container"> Chat en Vivo
+      <div id="userChatMessages" class="user-chat-messages"></div>
+      <input id="userChatInput" class="user-chat-input" type="text" placeholder="Escribe un mensaje..." />
+      <button id="userSendButton" class="user-send-button">Enviar</button>
+    </div>
   </section>
 
   <!-- Sección de footer -->

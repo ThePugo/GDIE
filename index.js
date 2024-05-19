@@ -22,6 +22,7 @@ io.on('connection', (socket) => {
     };
     socket.username = username;
     io.emit('scoresUpdate', users);
+    io.emit('userConnected', username);
   });
 
   socket.on('updateScore', (data) => {
@@ -33,9 +34,14 @@ io.on('connection', (socket) => {
     io.emit('scoresUpdate', users);
   });
 
+  socket.on('userChatMessage', (data) => {
+    io.emit('userChatMessage', data);
+  });
+
   socket.on('disconnect', () => {
     console.log("S'ha desconnectat");
     if (socket.username) {
+      io.emit('userDisconnected', socket.username);
       delete users[socket.username];
       io.emit('scoresUpdate', users);
     }

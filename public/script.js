@@ -8,6 +8,45 @@ var session = false;
 
 // Escucha cuando el contenido del DOM está completamente cargado
 document.addEventListener('DOMContentLoaded', function () {
+  socket = io();
+  const userSendButton = document.getElementById('userSendButton');
+  const userChatInput = document.getElementById('userChatInput');
+  const userChatMessages = document.getElementById('userChatMessages');
+
+  // Lógica del chat en la sección de puntuaciones de usuarios
+  userSendButton.addEventListener('click', function () {
+    const userMessage = userChatInput.value.trim();
+    if (userMessage) {
+      socket.emit('userChatMessage', { username, message: userMessage });
+      userChatInput.value = '';
+      appendUserChatMessage(username, userMessage, 'right');
+    }
+  });
+
+  userChatInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      const userMessage = userChatInput.value.trim();
+      if (userMessage) {
+        socket.emit('userChatMessage', { username, message: userMessage });
+        userChatInput.value = '';
+        appendUserChatMessage(username, userMessage, 'right');
+      }
+    }
+  });
+
+  socket.on('userChatMessage', function (data) {
+    if (data.username !== username) {
+      appendUserChatMessage(data.username, data.message, 'left');
+    }
+  });
+
+  socket.on('userConnected', function (username) {
+    appendSystemMessage(`${username} se ha conectado`);
+  });
+
+  socket.on('userDisconnected', function (username) {
+    appendSystemMessage(`${username} se ha desconectado`);
+  });
   const chatToggle = document.getElementById('chatToggle');
   const chatContainer = document.getElementById('chatContainer');
   const sendButton = document.getElementById('sendButton');
@@ -49,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
-  socket = io();
   socket.on('scoresUpdate', (scores) => {
     updateScores(scores);
   });
@@ -917,4 +955,23 @@ async function generateLyrics(prompt) {
 
   const result = await response.json();
   return result[0].generated_text.replace(/\n/g, '<br>');
+}
+
+function appendUserChatMessage(username, message, position) {
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message');
+  messageElement.innerHTML = `<span style="font-weight: bold;" class="${username.toLowerCase()}">${username}:</span> ${message}`;
+  messageElement.style.textAlign = position === 'right' ? 'right' : 'left';
+  const userChatMessages = document.getElementById('userChatMessages');
+  userChatMessages.appendChild(messageElement);
+  userChatMessages.scrollTop = userChatMessages.scrollHeight;
+}
+
+function appendSystemMessage(message) {
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message', 'system-message');
+  messageElement.textContent = message;
+  const userChatMessages = document.getElementById('userChatMessages');
+  userChatMessages.appendChild(messageElement);
+  userChatMessages.scrollTop = userChatMessages.scrollHeight;
 }
