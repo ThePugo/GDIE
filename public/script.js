@@ -762,40 +762,27 @@ function initHls(video, time, basename) {
 function updateScores(scores) {
   const scoresContainer = document.getElementById('scoresContainer');
   scoresContainer.innerHTML = '';
-
-  // Convierte el objeto de scores en un array de entradas [usuario, puntuación]
-  const scoresArray = Object.entries(scores);
-
-  // Ordena el array por puntuación en orden descendente
-  scoresArray.sort((a, b) => b[1].score - a[0].score);
-
-  // Recorre el array ordenado y crea los elementos HTML para cada usuario
-  scoresArray.forEach(([user, data]) => {
+  for (let user in scores) {
     const userScoreElement = document.createElement('div');
     userScoreElement.classList.add('user-score');
-    userScoreElement.innerHTML = `
-      <h4>${user}</h4>
-      <div class="questions-progress" id="progress-${user}"></div>
-      <div>Puntuación: ${data.score}</div>
-    `;
+    userScoreElement.innerHTML = `<h4>${user}</h4><div class="questions-progress" id="progress-${user}"></div><div>Puntuación: ${scores[user].score}</div>`;
 
     // Inicializa la barra de progreso
     const questionsProgress = userScoreElement.querySelector('.questions-progress');
     for (let i = 0; i < totalQuestionsGlobal; i++) {
       const questionElement = document.createElement('div');
       questionElement.classList.add('question');
-      if (data.answeredQuestions[i] === 'correct') {
+      if (scores[user].answeredQuestions[i] === 'correct') {
         questionElement.classList.add('correct');
-      } else if (data.answeredQuestions[i] === 'incorrect') {
+      } else if (scores[user].answeredQuestions[i] === 'incorrect') {
         questionElement.classList.add('incorrect');
       }
       questionsProgress.appendChild(questionElement);
     }
 
     scoresContainer.appendChild(userScoreElement);
-  });
+  }
 }
-
 
 function sendScoreUpdate(username, score, answeredQuestions) {
   socket.emit('updateScore', { username, score, answeredQuestions });
