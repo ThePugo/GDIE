@@ -8,6 +8,47 @@ var session = false;
 
 // Escucha cuando el contenido del DOM está completamente cargado
 document.addEventListener('DOMContentLoaded', function () {
+  const chatToggle = document.getElementById('chatToggle');
+  const chatContainer = document.getElementById('chatContainer');
+  const sendButton = document.getElementById('sendButton');
+  const chatInput = document.getElementById('chatInput');
+  const chatMessages = document.getElementById('chatMessages');
+
+  chatToggle.addEventListener('click', function () {
+    chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
+  });
+
+  sendButton.addEventListener('click', async function () {
+    const userMessage = chatInput.value.trim();
+    if (userMessage) {
+      if (session) {
+        appendMessage(username, userMessage);
+      }
+      else {
+        appendMessage('User', userMessage);
+      }
+      chatInput.value = '';
+      const botMessage = await generateLyrics(userMessage);
+      appendMessage('Bot', botMessage);
+    }
+  });
+
+  chatInput.addEventListener('keypress', async function (e) {
+    if (e.key === 'Enter') {
+      const userMessage = chatInput.value.trim();
+      if (userMessage) {
+        if (session) {
+          appendMessage(username, userMessage);
+        }
+        else {
+          appendMessage('User', userMessage);
+        }
+        chatInput.value = '';
+        const botMessage = await generateLyrics(userMessage);
+        appendMessage('Bot', botMessage);
+      }
+    }
+  });
   socket = io();
   socket.on('scoresUpdate', (scores) => {
     updateScores(scores);
@@ -852,4 +893,28 @@ async function loadAndClassifyAudio(video) {
       displayClassificationResult(classificationResult);
     }
   }
+}
+
+function appendMessage(sender, message) {
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message');
+  messageElement.innerHTML = `<span class="${sender.toLowerCase()}">${sender}:</span> ${message}`;
+  chatMessages.appendChild(messageElement);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function generateLyrics(prompt) {
+  const response = await fetch('https://api-inference.huggingface.co/models/huggingartists/twenty-one-pilots', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer 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',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      inputs: prompt
+    })
+  });
+
+  const result = await response.json();
+  return result[0].generated_text.replace(/\n/g, '<br>');
 }

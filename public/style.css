@@ -968,3 +968,78 @@
   font-size: 16px;
   color: #ffffff;
 }
+
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #d62420;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.chat-container {
+  display: none;
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 100;
+  width: 300px;
+  background-color: #231f20;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: center;
+  color: white;
+}
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  border-bottom: 1px solid #ccc;
+  color: white
+}
+
+.chat-input {
+  border: none;
+  padding: 10px;
+  flex: none;
+}
+
+.send-button {
+  border: none;
+  padding: 10px;
+  background-color: #d62420;
+  color: white;
+  cursor: pointer;
+  flex: none;
+}
+
+.message {
+  margin-bottom: 20px;
+}
+
+.user {
+  font-weight: bold;
+}
+
+.bot {
+  font-weight: bold;
+}
