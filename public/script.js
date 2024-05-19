@@ -2,9 +2,40 @@ let totalQuestionsGlobal = 0;
 let userScore = 0;
 let answered = 0;
 let answeredQuestions = {};
+let username = '';
+var socket = null;
+var session = false;
 
 // Escucha cuando el contenido del DOM está completamente cargado
 document.addEventListener('DOMContentLoaded', function () {
+  socket = io();
+  socket.on('scoresUpdate', (scores) => {
+    updateScores(scores);
+  });
+  document.getElementById('submitUsername').addEventListener('click', () => {
+    const input = document.getElementById('usernameInput');
+    if (input.checkValidity()) {
+      username = input.value.trim();
+      document.getElementById('usernameForm').style.display = 'none';
+      document.getElementById('userScores').style.display = 'block'; // Muestra el contenedor de puntuaciones
+      socket.emit('join', { username });
+    }
+    else {
+      alert("El nombre de usuario debe tener entre 2 y 10 caracteres");
+    }
+  });
+  const classifyButton = document.getElementById('classifyButton');
+  classifyButton.addEventListener('click', function () {
+    if (video.id !== "iamclancy") {
+      classifyButton.disabled = true;
+      classifyButton.innerHTML = "Cargando";
+      classifyButton.style.cursor = 'progress';
+      loadAndClassifyAudio(video);
+    }
+    else {
+      alert(`El vídeo que se está mostrando no es una canción`);
+    }
+  });
   //FUNCIÓN PARA BOTÓN DEL LOGO:
   var homeLink = document.getElementById('principal');
   homeLink.addEventListener('click', function () {
@@ -201,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
         video.playbackRate = currentRate;
         video.play();
         if (!video.paused) {
-          playPauseBtn.firstChild.src='images/pause.png';
+          playPauseBtn.firstChild.src = 'images/pause.png';
         }
         break;
       case '1080':
@@ -359,7 +390,7 @@ function playVideo(videoId) {
     updateTimeDisplay(videoToPlay, timeDisplay);
     updateMetadata(videoId);
     loadMetadataTrack(videoToPlay);
-    if (videoId !== 'iamclancy') {
+    if (videoId !== 'iamclancy' && session !== false) {
       loadQuestionsTrack(videoToPlay);
     }
     videoToPlay.style.display = 'block'; // Muestra el video.
@@ -387,6 +418,13 @@ function resetVideoSettings(video) {
   const timeDisplay = document.getElementById('timeDisplay');
   const settingsMenu = document.getElementById('settingsMenu');
   const qualitySelect = document.getElementById('qualitySelect');
+  const classifyButton = document.getElementById('classifyButton');
+  classifyButton.disabled = false;
+  classifyButton.style.display = 'block';
+
+  const classificationResult = document.getElementById('classificationResult');
+  classificationResult.style.display = 'none';
+  classificationResult.innerHTML = '';
   if (window.dashPlayer) {
     window.dashPlayer.reset();
   }
@@ -551,7 +589,7 @@ function disableMetadataTracks(videoElement) {
 function loadMetadataTrack(videoElement) {
   const tracks = videoElement.textTracks;
   for (let i = 0; i < tracks.length; i++) {
-    if (tracks[i].kind === 'metadata') {
+    if (tracks[i].kind === 'metadata' && tracks[i].label !== 'questions') {
       tracks[i].mode = 'hidden';
       tracks[i].oncuechange = function (e) {
         const track = e.target;
@@ -637,12 +675,15 @@ function handleAnswer(selectedIndex, correctIndex, question) {
 function handleScore(correct) {
   if (correct) {
     userScore++;
-    answered++;
-    document.getElementById('userScore').textContent = `${userScore} / ${totalQuestionsGlobal}`;
+    updateQuestionProgress(answered, 'correct'); // Actualiza la barra de progreso
+    answeredQuestions[answered] = 'correct';
+  } else {
+    updateQuestionProgress(answered, 'incorrect'); // Actualiza la barra de progreso
+    answeredQuestions[answered] = 'incorrect';
   }
-  else {
-    answered++;
-  }
+  answered++;
+  document.getElementById('userScore').textContent = `${userScore} / ${totalQuestionsGlobal}`;
+  sendScoreUpdate(username, userScore, answeredQuestions);  // Usa el nombre del usuario
   if (answered === totalQuestionsGlobal) {
     var userScorePercentage = (userScore / totalQuestionsGlobal) * 100;
     if (userScorePercentage === 100) {
@@ -660,9 +701,8 @@ function handleScore(correct) {
       behavior: 'smooth',
       block: 'start'
     });
-  }
-  else {
-    document.getElementById('check').textContent = `Respondidas= ${answered}, Sin responder= ${totalQuestionsGlobal - answered}`
+  } else {
+    document.getElementById('check').textContent = `Respondidas= ${answered}, Sin responder= ${totalQuestionsGlobal - answered}`;
   }
 }
 
@@ -695,8 +735,8 @@ function initDash(video, time, basename) {
       if (!video.paused) {
         playPauseBtn.firstChild.src = 'images/pause.png';
       }
-    }
-  })
+    }
+  })
   window.dashPlayer = player;
 }
 
@@ -709,11 +749,106 @@ function initHls(video, time, basename) {
     hls.on(Hls.Events.MANIFEST_PARSED, function () {
       video.load();
       video.play();
-      video.currentTime=time;
+      video.currentTime = time;
       if (!video.paused) {
         playPauseBtn.firstChild.src = 'images/pause.png';
       }
     })
     window.hlsPlayer = hls;
+  }
+}
+
+function updateScores(scores) {
+  const scoresContainer = document.getElementById('scoresContainer');
+  scoresContainer.innerHTML = '';
+  for (let user in scores) {
+    const userScoreElement = document.createElement('div');
+    userScoreElement.classList.add('user-score');
+    userScoreElement.innerHTML = `<h4>${user}</h4><div class="questions-progress" id="progress-${user}"></div><div>Puntuación: ${scores[user].score}</div>`;
+
+    // Inicializa la barra de progreso
+    const questionsProgress = userScoreElement.querySelector('.questions-progress');
+    for (let i = 0; i < totalQuestionsGlobal; i++) {
+      const questionElement = document.createElement('div');
+      questionElement.classList.add('question');
+      if (scores[user].answeredQuestions[i] === 'correct') {
+        questionElement.classList.add('correct');
+      } else if (scores[user].answeredQuestions[i] === 'incorrect') {
+        questionElement.classList.add('incorrect');
+      }
+      questionsProgress.appendChild(questionElement);
+    }
+
+    scoresContainer.appendChild(userScoreElement);
+  }
+}
+
+function sendScoreUpdate(username, score, answeredQuestions) {
+  socket.emit('updateScore', { username, score, answeredQuestions });
+}
+
+function initializeQuestionsProgress(totalQuestions) {
+  const questionsProgress = document.getElementById('questionsProgress');
+  for (let i = 0; i < totalQuestions; i++) {
+    const questionElement = document.createElement('div');
+    questionElement.classList.add('question');
+    questionsProgress.appendChild(questionElement);
+  }
+}
+
+function updateQuestionProgress(questionIndex, status) {
+  const questionsProgress = document.getElementById(`progress-${username}`);
+  const questionElements = questionsProgress.getElementsByClassName('question');
+  if (questionElements[questionIndex]) {
+    questionElements[questionIndex].classList.add(status);
+  }
+}
+
+async function classifyMusicGenre(blob) {
+  const formData = new FormData();
+  formData.append('file', blob, 'audio.aac');
+
+  const response = await fetch('https://api-inference.huggingface.co/models/dima806/music_genres_classification', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer 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' // Reemplaza con tu API key de Hugging Face
+    },
+    body: formData
+  });
+
+  const result = await response.json();
+  classifyButton.innerHTML = "Clasificar Género Musical";
+  classifyButton.disabled = false;
+  classifyButton.style.cursor = 'pointer';
+  return result;
+}
+
+function displayClassificationResult(result) {
+  const classificationContainer = document.getElementById('classificationResult');
+  classificationContainer.style.display = 'block';
+  classificationContainer.innerHTML = '';
+
+  if (result && result.length > 0) {
+    result.forEach(genreResult => {
+      const genre = genreResult.label;
+      const score = (genreResult.score * 100).toFixed(2);
+      const genreElement = document.createElement('p');
+      genreElement.textContent = `Género detectado: ${genre} (${score}%)`;
+      classificationContainer.appendChild(genreElement);
+    });
+  } else {
+    classificationContainer.innerHTML = '<p>No se pudo clasificar el género musical.</p>';
+  }
+}
+
+async function loadAndClassifyAudio(video) {
+  if (video !== null) {
+    var id = video.id;
+    if (id !== "iamclancy") {
+      const response = await fetch(`videos/${id}/testaudio_${id}.aac`);
+      const audioBlob = await response.blob();
+      const classificationResult = await classifyMusicGenre(audioBlob);
+      displayClassificationResult(classificationResult);
+    }
   }
 }
