@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('usernameForm').style.display = 'none';
       document.getElementById('userScores').style.display = 'block'; // Muestra el contenedor de puntuaciones
       socket.emit('join', { username });
+      session = true;
     }
     else {
       alert("El nombre de usuario debe tener entre 2 y 10 caracteres");
@@ -794,6 +795,7 @@ function updateScores(scores) {
     scoresContainer.appendChild(userScoreElement);
   });
 }
+
 
 function sendScoreUpdate(username, score, answeredQuestions) {
   socket.emit('updateScore', { username, score, answeredQuestions });
