@@ -898,7 +898,7 @@ async function loadAndClassifyAudio(video) {
 function appendMessage(sender, message) {
   const messageElement = document.createElement('div');
   messageElement.classList.add('message');
-  messageElement.innerHTML = `<span class="${sender.toLowerCase()}">${sender}:</span> ${message}`;
+  messageElement.innerHTML = `<span style="font-weight: bold;" class="${sender.toLowerCase()}">${sender}:</span> ${message}`;
   chatMessages.appendChild(messageElement);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
