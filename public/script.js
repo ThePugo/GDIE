@@ -97,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
       username = input.value.trim();
       document.getElementById('usernameForm').style.display = 'none';
       document.getElementById('userScores').style.display = 'block'; // Muestra el contenedor de puntuaciones
+      document.getElementById('usernameDisplay').textContent = username;
+      document.getElementById('register').style.display = 'none';
       socket.emit('join', { username });
       session = true;
     }
@@ -934,6 +936,12 @@ async function loadAndClassifyAudio(video) {
 }
 
 function appendMessage(sender, message) {
+  // Truncar el mensaje si es demasiado largo
+  if (message.length > 2200) {
+    alert('El mensaje supera los 2200 caracteres y será truncado.');
+    message = message.substring(0, 2200); // Truncar el mensaje
+  }
+
   const messageElement = document.createElement('div');
   messageElement.classList.add('message');
   messageElement.innerHTML = `<span style="font-weight: bold;" class="${sender.toLowerCase()}">${sender}:</span> ${message}`;
@@ -954,10 +962,19 @@ async function generateLyrics(prompt) {
   });
 
   const result = await response.json();
-  return result[0].generated_text.replace(/\n/g, '<br>');
+  if (result[0]) {
+    return result[0].generated_text.replace(/\n/g, '<br>');
+  }
+  else {
+    return "Sorry, I've encountered an error! Please, try again!";
+  }
 }
 
 function appendUserChatMessage(username, message, position) {
+  if (message.length > 2200) {
+    alert('El mensaje supera los 2200 caracteres y será truncado.');
+    message = message.substring(0, 2200); // Truncar el mensaje
+  }
   const messageElement = document.createElement('div');
   messageElement.classList.add('message');
   messageElement.innerHTML = `<span style="font-weight: bold;" class="${username.toLowerCase()}">${username}:</span> ${message}`;

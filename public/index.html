@@ -83,7 +83,7 @@
       <span>Descubre la Historia a Través de los Videoclips: ¡Explora los Álbumes!</span>
     </div>
     <div class="veralbumes" style="cursor: pointer">
-      <a href="#usernameForm" style="text-decoration: none;">Inicia Sesión Para Ver Las Preguntas</a>
+      <a href="#usernameForm" style="text-decoration: none;">Regístrate Para Ver Las Preguntas</a>
     </div>
   </section>
   <button id="chatToggle" class="chat-toggle">ChatBot</button>
@@ -266,18 +266,23 @@
     </div>
   </section>
 
+  <span id= "register" class="register-span">Regístrate</span>
   <section id="usernameForm" class="username-form">
-    <label for="usernameInput">Ingresa tu nombre:</label>
-    <input type="text" required minlength="2" maxlength="10" id="usernameInput" placeholder="Escribe...">
+    <input type="text" required minlength="2" maxlength="10" id="usernameInput" placeholder="Escribe tu Nombre"
+      style="font-size: medium;">
     <button id="submitUsername">Enviar</button>
   </section>
 
   <section id="userScores" class="user-scores" style="display: none;">
     <h3>Puntuación de los Usuarios Conectados</h3>
     <div id="scoresContainer"></div>
-    
+
     <!-- Chat de usuarios -->
-    <div class="user-chat-container"> Chat en Vivo
+    <div class="user-chat-container">
+      <div class="chat-header">
+        <span id="usernameDisplay"></span>
+        Chat en Vivo
+      </div>
       <div id="userChatMessages" class="user-chat-messages"></div>
       <input id="userChatInput" class="user-chat-input" type="text" placeholder="Escribe un mensaje..." />
       <button id="userSendButton" class="user-send-button">Enviar</button>
