@@ -970,6 +970,27 @@
   color: #ffffff;
 }
 
+.progress-bar-container {
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.progress-bar-genre {
+  height: 20px;
+  border-radius: 5px;
+  text-align: center;
+
+  background-color: #d62420;
+}
+
+.progress-bar-text {
+
+  color: black;
+
+}
+
 .chat-toggle {
   position: fixed;
   bottom: 20px;

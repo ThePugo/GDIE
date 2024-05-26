@@ -914,14 +914,26 @@ function displayClassificationResult(result) {
     result.forEach(genreResult => {
       const genre = genreResult.label;
       const score = (genreResult.score * 100).toFixed(2);
-      const genreElement = document.createElement('p');
-      genreElement.textContent = `Género detectado: ${genre} (${score}%)`;
-      classificationContainer.appendChild(genreElement);
+      const progressBarContainer = document.createElement('div');
+      progressBarContainer.className = 'progress-bar-container';
+
+      const progressBar = document.createElement('div');
+      progressBar.className = 'progress-bar-genre';
+      progressBar.style.width = `${score}%`;
+
+      const progressText = document.createElement('div');
+      progressText.className = 'progress-bar-text';
+      progressText.textContent = `${genre} (${score}%)`;
+
+      progressBarContainer.appendChild(progressBar);
+      progressBarContainer.appendChild(progressText);  // Asegura que el texto esté visible sobre cualquier fondo
+      classificationContainer.appendChild(progressBarContainer);
     });
   } else {
     classificationContainer.innerHTML = '<p>No se pudo clasificar el género musical.</p>';
   }
 }
+
 
 async function loadAndClassifyAudio(video) {
   if (video !== null) {
